@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction
+## Introduction
 
 `biotidy` package offers useful utilities for integrating Bioinformatic objects
 such as SummarizedExperiment and Seurat into the tidy(verse) framework. 
@@ -30,6 +30,7 @@ The inspiration for `biotidy` came from the functionality of the
 work with other bioinformatic objects, such as `SummarizedExperiment`,
 `ExpressionSet`, and `Seurat`. 
 
+## Prepare data
 ```{r setup}
 library(biotidy)
 mocked_se <- mockSE()
@@ -38,7 +39,7 @@ mocked_es <- mockES()
 mocked_seurat <- mockSeurat()
 ```
 
-# makePerCellDF
+## makePerCellDF
 `makePerCellDF` creates a per-cell data.frame (i.e., where each row represents a
 sample / cell) from the Bioinformatic objects.
 
@@ -81,7 +82,7 @@ makePerCellDF(mocked_seurat,
 )
 ```
 
-# makePerFeatureDF
+## makePerFeatureDF
 `makePerFeatureDF` Create a per-feature data.frame (i.e., where each row
 represents a feature / gene). 
 
@@ -124,7 +125,7 @@ makePerFeatureDF(mocked_seurat,
 )
 ```
 
-# Session information {-}
+## Session information {-}
 
 ```{r}
 sessionInfo()

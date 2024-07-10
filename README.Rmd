@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 # biotidy
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/Yunuuuu/eheat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yunuuuu/eheat/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/Yunuuuu/biotidy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Yunuuuu/biotidy/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ```{r child = "vignettes/biotidy.Rmd"}

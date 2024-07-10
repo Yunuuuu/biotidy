@@ -621,8 +621,7 @@ padding-top: 0px;
 Bioinformatic objects such as SummarizedExperiment and Seurat into the
 tidy(verse) framework.</p>
 <p>It is important to note that <code>biotidy</code> serves a different
-purpose compared to
-<code>[tidyomics](https://github.com/tidyomics)</code>, which primarily
+purpose compared to <a href="https://github.com/tidyomics">tidyomics</a>, which primarily
 utilizes a pipe-based workflow for managing bioinformatic objects.
 Specifically, “biotidy” provides a method for extracting a data frame
 from bioinformatic objects, similar to how the “broom::tidy” function
@@ -645,99 +644,99 @@ each row represents a sample / cell) from the Bioinformatic objects.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># SummarizedExperiment method</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt;         Gene0001 Gene0002 Gene0003 Gene0004 Gene0005</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Cell001        4      586      460        1      468</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; Cell002        0       96       41       17      397</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; Cell003        0      904      286        1      221</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; Cell004        2        0      398       61      225</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; Cell005        0      626      136        0      622</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Cell001      241        1        5        0      695</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; Cell002       23      284       38        0      240</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; Cell003        0       35      698        0      189</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; Cell004        0       52      434        0      655</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; Cell005       10      175      201        0      128</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_se, <span class="at">melt =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt;   Mutation_Status Cell_Cycle Treatment .features .assay</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; 1        positive         G0    treat2  Gene0001      4</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; 2        negative          S    treat2  Gene0001      0</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; 3        negative         G1    treat1  Gene0001      0</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; 4        positive         G1    treat1  Gene0001      2</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; 5        positive         G0    treat2  Gene0001      0</span></span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; 1        positive        G2M    treat1  Gene0001    241</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; 2        negative        G2M    treat1  Gene0001     23</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; 3        positive          S    treat1  Gene0001      0</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; 4        positive         G1    treat2  Gene0001      0</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; 5        negative        G2M    treat1  Gene0001     10</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_se, <span class="at">melt =</span> <span class="cn">TRUE</span>, <span class="at">keep_rownames =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt;       .id Mutation_Status Cell_Cycle Treatment .features</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001        positive         G0    treat2  Gene0001</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell002        negative          S    treat2  Gene0001</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell003        negative         G1    treat1  Gene0001</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell004        positive         G1    treat1  Gene0001</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell005        positive         G0    treat2  Gene0001</span></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001        positive        G2M    treat1  Gene0001</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell002        negative        G2M    treat1  Gene0001</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell003        positive          S    treat1  Gene0001</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell004        positive         G1    treat2  Gene0001</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell005        negative        G2M    treat1  Gene0001</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_se, <span class="at">features =</span> <span class="cn">FALSE</span>, <span class="at">use_coldata =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; data frame with 0 columns and 200 rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># SingleCellExperiment method</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_sce)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;         Gene0001 Gene0002 Gene0003 Gene0004 Gene0005</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; Cell001        0        0       15        1      326</span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Cell002        4       51      225        0      142</span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Cell003        1        0      152       22      163</span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; Cell004       62        0       15        0      361</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; Cell005       31        0       62      223     1182</span></span></code></pre></div>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; Cell001        0        4        0       16      434</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; Cell002       41        0       69        0      157</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; Cell003        0        3       27      124      299</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; Cell004       14       11       14       52      448</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt; Cell005       85      107      144       22       95</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_sce, <span class="at">melt =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt;   Mutation_Status Cell_Cycle Treatment .features .assay</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; 1        negative         G1    treat1  Gene0001      0</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; 2        negative        G2M    treat1  Gene0001      4</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; 3        positive        G2M    treat2  Gene0001      1</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; 4        negative          S    treat1  Gene0001     62</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; 5        negative          S    treat2  Gene0001     31</span></span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; 1        positive        G2M    treat2  Gene0001      0</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; 2        positive         G0    treat2  Gene0001     41</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; 3        negative         G0    treat2  Gene0001      0</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; 4        positive        G2M    treat2  Gene0001     14</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; 5        positive         G1    treat2  Gene0001     85</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_sce, <span class="at">melt =</span> <span class="cn">TRUE</span>, <span class="at">keep_rownames =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt;       .id Mutation_Status Cell_Cycle Treatment .features</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001        negative         G1    treat1  Gene0001</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell002        negative        G2M    treat1  Gene0001</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell003        positive        G2M    treat2  Gene0001</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell004        negative          S    treat1  Gene0001</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell005        negative          S    treat2  Gene0001</span></span></code></pre></div>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001        positive        G2M    treat2  Gene0001</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell002        positive         G0    treat2  Gene0001</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell003        negative         G0    treat2  Gene0001</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell004        positive        G2M    treat2  Gene0001</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell005        positive         G1    treat2  Gene0001</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_sce, <span class="at">features =</span> <span class="cn">FALSE</span>, <span class="at">use_coldata =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; data frame with 0 columns and 200 rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># ExpressionSet method</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_es)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt;         Gene0001 Gene0002 Gene0003 Gene0004 Gene0005</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; Cell001       12      257        1        0      164</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; Cell002        0      342        0       38      133</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; Cell003        0     1028        0      120       66</span></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; Cell004        0      144       52        4       82</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; Cell005        0       29        0       91      703</span></span></code></pre></div>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; Cell001        2       95        0     1069       26</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; Cell002      135      898        0       97      100</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt; Cell003      117      816        0     1096        3</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; Cell004       72      465        0      817       60</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; Cell005       17      995        0      146      298</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_es, <span class="at">melt =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt;   Mutation_Status Cell_Cycle Treatment .features .assay</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt; 1        negative         G1    treat2  Gene0001     12</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt; 2        positive         G1    treat2  Gene0001      0</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; 3        negative          S    treat2  Gene0001      0</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; 4        negative         G0    treat1  Gene0001      0</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; 5        positive        G2M    treat1  Gene0001      0</span></span></code></pre></div>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt; 1        negative          S    treat2  Gene0001      2</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt; 2        negative          S    treat2  Gene0001    135</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt; 3        positive         G1    treat2  Gene0001    117</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; 4        negative        G2M    treat2  Gene0001     72</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt; 5        positive        G2M    treat1  Gene0001     17</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_es, <span class="at">melt =</span> <span class="cn">TRUE</span>, <span class="at">keep_rownames =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt;       .id Mutation_Status Cell_Cycle Treatment .features</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001        negative         G1    treat2  Gene0001</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell002        positive         G1    treat2  Gene0001</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell003        negative          S    treat2  Gene0001</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell004        negative         G0    treat1  Gene0001</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001        negative          S    treat2  Gene0001</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell002        negative          S    treat2  Gene0001</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell003        positive         G1    treat2  Gene0001</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell004        negative        G2M    treat2  Gene0001</span></span>
 <span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell005        positive        G2M    treat1  Gene0001</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_es, <span class="at">features =</span> <span class="cn">FALSE</span>, <span class="at">use_coldata =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co">#&gt; data frame with 0 columns and 200 rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Seurat method</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_seurat, <span class="at">layer =</span> <span class="st">&quot;counts&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#&gt;         Gene0001 Gene0002 Gene0003 Gene0004 Gene0005</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; Cell001        0      260        0        0      208</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt; Cell002        0      183        0        0      257</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt; Cell003        0       25        0        0       29</span></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; Cell004        0      330       22        0        1</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; Cell005        0       21        0       24       61</span></span></code></pre></div>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#&gt; Cell001        0      156      408        0        5</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co">#&gt; Cell002        0      244      459      160        0</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co">#&gt; Cell003        0        0       49       12        0</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co">#&gt; Cell004        2       21      841       46        0</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co">#&gt; Cell005        1      101      391      242       13</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_seurat, <span class="at">layer =</span> <span class="st">&quot;counts&quot;</span>, <span class="at">melt =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co">#&gt;      orig.ident nCount_RNA nFeature_RNA Mutation_Status Cell_Cycle</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">#&gt; 1 SeuratProject     377119         1486        negative        G2M</span></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co">#&gt; 2 SeuratProject     377903         1453        positive         G0</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">#&gt; 3 SeuratProject     391038         1492        negative         G1</span></span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co">#&gt; 4 SeuratProject     381896         1486        positive          S</span></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; 5 SeuratProject     386165         1513        positive        G2M</span></span></code></pre></div>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co">#&gt; 1 SeuratProject     379423         1505        positive         G1</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co">#&gt; 2 SeuratProject     352863         1520        negative        G2M</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co">#&gt; 3 SeuratProject     377710         1496        positive         G0</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co">#&gt; 4 SeuratProject     372060         1543        negative          S</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co">#&gt; 5 SeuratProject     356597         1538        negative          S</span></span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_seurat,</span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">&quot;counts&quot;</span>, <span class="at">melt =</span> <span class="cn">TRUE</span>, <span class="at">keep_rownames =</span> <span class="cn">TRUE</span></span>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co">#&gt;       .id    orig.ident nCount_RNA nFeature_RNA Mutation_Status</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt; 1 Cell001 SeuratProject     377119         1486        negative</span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt; 2 Cell002 SeuratProject     377903         1453        positive</span></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; 3 Cell003 SeuratProject     391038         1492        negative</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt; 4 Cell004 SeuratProject     381896         1486        positive</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co">#&gt; 5 Cell005 SeuratProject     386165         1513        positive</span></span></code></pre></div>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co">#&gt; 1 Cell001 SeuratProject     379423         1505        positive</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co">#&gt; 2 Cell002 SeuratProject     352863         1520        negative</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co">#&gt; 3 Cell003 SeuratProject     377710         1496        positive</span></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="co">#&gt; 4 Cell004 SeuratProject     372060         1543        negative</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co">#&gt; 5 Cell005 SeuratProject     356597         1538        negative</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">makePerCellDF</span>(mocked_seurat,</span>
 <span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">&quot;counts&quot;</span>, <span class="at">features =</span> <span class="cn">FALSE</span>, <span class="at">use_coldata =</span></span>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>    <span class="cn">FALSE</span></span>
@@ -749,25 +748,25 @@ where each row represents a feature / gene).</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># SummarizedExperiment method</span></span>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_se)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#&gt;          Cell001 Cell002 Cell003 Cell004 Cell005</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co">#&gt; Gene0001       4       0       0       2       0</span></span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">#&gt; Gene0002     586      96     904       0     626</span></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">#&gt; Gene0003     460      41     286     398     136</span></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">#&gt; Gene0004       1      17       1      61       0</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">#&gt; Gene0005     468     397     221     225     622</span></span></code></pre></div>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co">#&gt; Gene0001     241      23       0       0      10</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co">#&gt; Gene0002       1     284      35      52     175</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co">#&gt; Gene0003       5      38     698     434     201</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co">#&gt; Gene0004       0       0       0       0       0</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co">#&gt; Gene0005     695     240     189     655     128</span></span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_se, <span class="at">melt =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co">#&gt;    .cells .assay</span></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001      4</span></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell001    586</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell001    460</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell001      1</span></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell001    468</span></span></code></pre></div>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001    241</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell001      1</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell001      5</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell001      0</span></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell001    695</span></span></code></pre></div>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_se, <span class="at">melt =</span> <span class="cn">TRUE</span>, <span class="at">keep_rownames =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
 <span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co">#&gt;        .id  .cells .assay</span></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co">#&gt; 1 Gene0001 Cell001      4</span></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co">#&gt; 2 Gene0002 Cell001    586</span></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co">#&gt; 3 Gene0003 Cell001    460</span></span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt; 4 Gene0004 Cell001      1</span></span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co">#&gt; 5 Gene0005 Cell001    468</span></span></code></pre></div>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co">#&gt; 1 Gene0001 Cell001    241</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co">#&gt; 2 Gene0002 Cell001      1</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co">#&gt; 3 Gene0003 Cell001      5</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co">#&gt; 4 Gene0004 Cell001      0</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co">#&gt; 5 Gene0005 Cell001    695</span></span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_se, <span class="at">features =</span> <span class="cn">FALSE</span>, <span class="at">use_rowdata =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co">#&gt;   [1] Cell001 Cell002 Cell003 Cell004 Cell005 Cell006 Cell007 Cell008 Cell009</span></span>
 <span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co">#&gt;  [10] Cell010 Cell011 Cell012 Cell013 Cell014 Cell015 Cell016 Cell017 Cell018</span></span>
@@ -796,25 +795,25 @@ where each row represents a feature / gene).</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># SingleCellExperiment method</span></span>
 <span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_sce)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#&gt;          Cell001 Cell002 Cell003 Cell004 Cell005</span></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#&gt; Gene0001       0       4       1      62      31</span></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co">#&gt; Gene0002       0      51       0       0       0</span></span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="co">#&gt; Gene0003      15     225     152      15      62</span></span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co">#&gt; Gene0004       1       0      22       0     223</span></span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="co">#&gt; Gene0005     326     142     163     361    1182</span></span></code></pre></div>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#&gt; Gene0001       0      41       0      14      85</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co">#&gt; Gene0002       4       0       3      11     107</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="co">#&gt; Gene0003       0      69      27      14     144</span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co">#&gt; Gene0004      16       0     124      52      22</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="co">#&gt; Gene0005     434     157     299     448      95</span></span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_sce, <span class="at">melt =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="co">#&gt;    .cells .assay</span></span>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001      0</span></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell001      0</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell001     15</span></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell001      1</span></span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell001    326</span></span></code></pre></div>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell001      4</span></span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell001      0</span></span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell001     16</span></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell001    434</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_sce, <span class="at">melt =</span> <span class="cn">TRUE</span>, <span class="at">keep_rownames =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
 <span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co">#&gt;        .id  .cells .assay</span></span>
 <span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co">#&gt; 1 Gene0001 Cell001      0</span></span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co">#&gt; 2 Gene0002 Cell001      0</span></span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co">#&gt; 3 Gene0003 Cell001     15</span></span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="co">#&gt; 4 Gene0004 Cell001      1</span></span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co">#&gt; 5 Gene0005 Cell001    326</span></span></code></pre></div>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co">#&gt; 2 Gene0002 Cell001      4</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="co">#&gt; 3 Gene0003 Cell001      0</span></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="co">#&gt; 4 Gene0004 Cell001     16</span></span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co">#&gt; 5 Gene0005 Cell001    434</span></span></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_sce, <span class="at">features =</span> <span class="cn">FALSE</span>, <span class="at">use_rowdata =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co">#&gt;   [1] Cell001 Cell002 Cell003 Cell004 Cell005 Cell006 Cell007 Cell008 Cell009</span></span>
 <span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co">#&gt;  [10] Cell010 Cell011 Cell012 Cell013 Cell014 Cell015 Cell016 Cell017 Cell018</span></span>
@@ -843,25 +842,25 @@ where each row represents a feature / gene).</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># ExpressionSet method</span></span>
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_es)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a><span class="co">#&gt;          Cell001 Cell002 Cell003 Cell004 Cell005</span></span>
-<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co">#&gt; Gene0001      12       0       0       0       0</span></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="co">#&gt; Gene0002     257     342    1028     144      29</span></span>
-<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="co">#&gt; Gene0003       1       0       0      52       0</span></span>
-<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="co">#&gt; Gene0004       0      38     120       4      91</span></span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="co">#&gt; Gene0005     164     133      66      82     703</span></span></code></pre></div>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co">#&gt; Gene0001       2     135     117      72      17</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="co">#&gt; Gene0002      95     898     816     465     995</span></span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="co">#&gt; Gene0003       0       0       0       0       0</span></span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="co">#&gt; Gene0004    1069      97    1096     817     146</span></span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="co">#&gt; Gene0005      26     100       3      60     298</span></span></code></pre></div>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_es, <span class="at">melt =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
 <span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="co">#&gt;    .cells .assay</span></span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001     12</span></span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell001    257</span></span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell001      1</span></span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell001      0</span></span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell001    164</span></span></code></pre></div>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001      2</span></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell001     95</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell001      0</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell001   1069</span></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell001     26</span></span></code></pre></div>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_es, <span class="at">melt =</span> <span class="cn">TRUE</span>, <span class="at">keep_rownames =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
 <span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="co">#&gt;        .id  .cells .assay</span></span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="co">#&gt; 1 Gene0001 Cell001     12</span></span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="co">#&gt; 2 Gene0002 Cell001    257</span></span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="co">#&gt; 3 Gene0003 Cell001      1</span></span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="co">#&gt; 4 Gene0004 Cell001      0</span></span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a><span class="co">#&gt; 5 Gene0005 Cell001    164</span></span></code></pre></div>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a><span class="co">#&gt; 1 Gene0001 Cell001      2</span></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="co">#&gt; 2 Gene0002 Cell001     95</span></span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a><span class="co">#&gt; 3 Gene0003 Cell001      0</span></span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a><span class="co">#&gt; 4 Gene0004 Cell001   1069</span></span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a><span class="co">#&gt; 5 Gene0005 Cell001     26</span></span></code></pre></div>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_es, <span class="at">features =</span> <span class="cn">FALSE</span>, <span class="at">use_rowdata =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="co">#&gt;   [1] Cell001 Cell002 Cell003 Cell004 Cell005 Cell006 Cell007 Cell008 Cell009</span></span>
 <span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="co">#&gt;  [10] Cell010 Cell011 Cell012 Cell013 Cell014 Cell015 Cell016 Cell017 Cell018</span></span>
@@ -890,27 +889,27 @@ where each row represents a feature / gene).</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Seurat method</span></span>
 <span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_seurat, <span class="at">layer =</span> <span class="st">&quot;counts&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
 <span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a><span class="co">#&gt;          Cell001 Cell002 Cell003 Cell004 Cell005</span></span>
-<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="co">#&gt; Gene0001       0       0       0       0       0</span></span>
-<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a><span class="co">#&gt; Gene0002     260     183      25     330      21</span></span>
-<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a><span class="co">#&gt; Gene0003       0       0       0      22       0</span></span>
-<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a><span class="co">#&gt; Gene0004       0       0       0       0      24</span></span>
-<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a><span class="co">#&gt; Gene0005     208     257      29       1      61</span></span></code></pre></div>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a><span class="co">#&gt; Gene0001       0       0       0       2       1</span></span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a><span class="co">#&gt; Gene0002     156     244       0      21     101</span></span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a><span class="co">#&gt; Gene0003     408     459      49     841     391</span></span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a><span class="co">#&gt; Gene0004       0     160      12      46     242</span></span>
+<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a><span class="co">#&gt; Gene0005       5       0       0       0      13</span></span></code></pre></div>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_seurat, <span class="at">layer =</span> <span class="st">&quot;counts&quot;</span>, <span class="at">melt =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
 <span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="co">#&gt;    .cells .assay</span></span>
 <span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="co">#&gt; 1 Cell001      0</span></span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell001    260</span></span>
-<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell001      0</span></span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co">#&gt; 2 Cell001    156</span></span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a><span class="co">#&gt; 3 Cell001    408</span></span>
 <span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="co">#&gt; 4 Cell001      0</span></span>
-<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell001    208</span></span></code></pre></div>
+<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a><span class="co">#&gt; 5 Cell001      5</span></span></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_seurat,</span>
 <span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">&quot;counts&quot;</span>, <span class="at">melt =</span> <span class="cn">TRUE</span>, <span class="at">keep_rownames =</span> <span class="cn">TRUE</span></span>
 <span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span>
 <span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co">#&gt;        .id  .cells .assay</span></span>
 <span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a><span class="co">#&gt; 1 Gene0001 Cell001      0</span></span>
-<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="co">#&gt; 2 Gene0002 Cell001    260</span></span>
-<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="co">#&gt; 3 Gene0003 Cell001      0</span></span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="co">#&gt; 2 Gene0002 Cell001    156</span></span>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="co">#&gt; 3 Gene0003 Cell001    408</span></span>
 <span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a><span class="co">#&gt; 4 Gene0004 Cell001      0</span></span>
-<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="co">#&gt; 5 Gene0005 Cell001    208</span></span></code></pre></div>
+<span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a><span class="co">#&gt; 5 Gene0005 Cell001      5</span></span></code></pre></div>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="fu">makePerFeatureDF</span>(mocked_seurat,</span>
 <span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">&quot;counts&quot;</span>, <span class="at">features =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>  <span class="at">use_rowdata =</span> <span class="cn">FALSE</span></span>

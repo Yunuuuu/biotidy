@@ -1,0 +1,120 @@
+---
+title: "biotidy"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{biotidy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+`biotidy` package offers useful utilities for integrating Bioinformatic objects
+such as SummarizedExperiment and Seurat into the tidy(verse) framework. 
+
+```{r setup}
+library(biotidy)
+mocked_se <- mockSE()
+mocked_sce <- mockSCE()
+mocked_es <- mockES()
+mocked_seurat <- mockSeurat()
+```
+
+# makePerCellDF
+`makePerCellDF` creates a per-cell data.frame (i.e., where each row represents a
+sample / cell) from the Bioinformatic objects.
+
+```{r}
+# SummarizedExperiment method
+makePerCellDF(mocked_se)[1:5, 1:5]
+makePerCellDF(mocked_se, melt = TRUE)[1:5, 1:5]
+makePerCellDF(mocked_se, melt = TRUE, keep_rownames = TRUE)[1:5, 1:5]
+makePerCellDF(mocked_se, features = FALSE, use_coldata = FALSE)
+```
+
+
+```{r}
+# SingleCellExperiment method
+makePerCellDF(mocked_sce)[1:5, 1:5]
+makePerCellDF(mocked_sce, melt = TRUE)[1:5, 1:5]
+makePerCellDF(mocked_sce, melt = TRUE, keep_rownames = TRUE)[1:5, 1:5]
+makePerCellDF(mocked_sce, features = FALSE, use_coldata = FALSE)
+```
+
+
+```{r}
+# ExpressionSet method
+makePerCellDF(mocked_es)[1:5, 1:5]
+makePerCellDF(mocked_es, melt = TRUE)[1:5, 1:5]
+makePerCellDF(mocked_es, melt = TRUE, keep_rownames = TRUE)[1:5, 1:5]
+makePerCellDF(mocked_es, features = FALSE, use_coldata = FALSE)
+```
+
+```{r}
+# Seurat method
+makePerCellDF(mocked_seurat, layer = "counts")[1:5, 1:5]
+makePerCellDF(mocked_seurat, layer = "counts", melt = TRUE)[1:5, 1:5]
+makePerCellDF(mocked_seurat,
+  layer = "counts", melt = TRUE, keep_rownames = TRUE
+)[1:5, 1:5]
+makePerCellDF(mocked_seurat,
+  layer = "counts", features = FALSE, use_coldata =
+    FALSE
+)
+```
+
+# makePerFeatureDF
+`makePerFeatureDF` Create a per-feature data.frame (i.e., where each row
+represents a feature / gene). 
+
+```{r}
+# SummarizedExperiment method
+makePerFeatureDF(mocked_se)[1:5, 1:5]
+makePerFeatureDF(mocked_se, melt = TRUE)[1:5, ]
+makePerFeatureDF(mocked_se, melt = TRUE, keep_rownames = TRUE)[1:5, ]
+makePerFeatureDF(mocked_se, features = FALSE, use_rowdata = FALSE)
+```
+
+
+```{r}
+# SingleCellExperiment method
+makePerFeatureDF(mocked_sce)[1:5, 1:5]
+makePerFeatureDF(mocked_sce, melt = TRUE)[1:5, ]
+makePerFeatureDF(mocked_sce, melt = TRUE, keep_rownames = TRUE)[1:5, ]
+makePerFeatureDF(mocked_sce, features = FALSE, use_rowdata = FALSE)
+```
+
+
+```{r}
+# ExpressionSet method
+makePerFeatureDF(mocked_es)[1:5, 1:5]
+makePerFeatureDF(mocked_es, melt = TRUE)[1:5, ]
+makePerFeatureDF(mocked_es, melt = TRUE, keep_rownames = TRUE)[1:5, ]
+makePerFeatureDF(mocked_es, features = FALSE, use_rowdata = FALSE)
+```
+
+```{r}
+# Seurat method
+makePerFeatureDF(mocked_seurat, layer = "counts")[1:5, 1:5]
+makePerFeatureDF(mocked_seurat, layer = "counts", melt = TRUE)[1:5, ]
+makePerFeatureDF(mocked_seurat,
+  layer = "counts", melt = TRUE, keep_rownames = TRUE
+)[1:5, ]
+makePerFeatureDF(mocked_seurat,
+  layer = "counts", features = FALSE,
+  use_rowdata = FALSE
+)
+```
+
+# Session information {-}
+
+```{r}
+sessionInfo()
+```

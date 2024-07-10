@@ -4,12 +4,12 @@ Version: 0.99.0
 Authors@R: 
     person("Yun", "Peng", , "yunyunp96@163.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-2801-3332"))
 Description: This is a collection of utility functions that allow to bring 
-    Bioinformatic objects like SummarizedExperiment, and Seurat into tidy(verse) framework.
+    Bioinformatic objects like SummarizedExperiment and Seurat into tidy(verse) framework.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-biocViews: AssayDomain, RNASeq, GeneExpression, Sequencing
+biocViews: AssayDomain, RNASeq, GeneExpression, Sequencing, SingleCell
 Imports: 
     data.table,
     rlang (>= 1.1.0),
@@ -17,7 +17,10 @@ Imports:
 Suggests: 
     Biobase,
     cli,
+    knitr,
     methods,
+    rmarkdown,
     SeuratObject,
     SingleCellExperiment,
     SummarizedExperiment
+VignetteBuilder: knitr

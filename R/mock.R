@@ -12,6 +12,8 @@
 #' @name mock
 NULL
 
+#' @examples 
+#' mockES()
 #' @return
 #' - `mockES`: A [ExpressionSet][Biobase::ExpressionSet] object.
 #' @rdname mock
@@ -24,6 +26,8 @@ mockES <- function(ncells = 200, ngenes = 2000) {
     )
 }
 
+#' @examples 
+#' mockSE()
 #' @return
 #' - `mockSE`: A
 #'   [SummarizedExperiment][SummarizedExperiment::SummarizedExperiment] object.
@@ -37,6 +41,8 @@ mockSE <- function(ncells = 200, ngenes = 2000) {
     )
 }
 
+#' @examples 
+#' mockSCE()
 #' @return
 #' - `mockSCE`: A
 #'   [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment] object.
@@ -56,6 +62,8 @@ mockSCE <- function(ncells = 200, ngenes = 2000, nspikes = 100) {
     out
 }
 
+#' @examples 
+#' mockSeurat()
 #' @return
 #' - `mockSeurat`: A [Seurat][SeuratObject::Seurat-class] object.
 #' @rdname mock

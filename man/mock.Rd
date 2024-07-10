@@ -49,3 +49,9 @@ Mock up a \link[SummarizedExperiment:RangedSummarizedExperiment-class]{Summarize
 \link[Biobase:class.ExpressionSet]{ExpressionSet} or
 \link[SeuratObject:Seurat-class]{Seurat} object containing simulated data.
 }
+\examples{
+mockES()
+mockSE()
+mockSCE()
+mockSeurat()
+}

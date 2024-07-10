@@ -21,7 +21,7 @@ such as SummarizedExperiment and Seurat into the tidy(verse) framework.
 
 It is important to note that `biotidy` serves a different purpose compared to
 [tidyomics](https://github.com/tidyomics), which primarily utilizes a
-pipe-based workflow for managing bioinformatic objects. Specifically, "biotidy"
+pipe-based workflow for managing bioinformatic objects. Specifically, `biotidy`
 provides a method for extracting a data frame from bioinformatic objects,
 similar to how the `broom::tidy` function operates on statistical model objects.
 The inspiration for `biotidy` came from the functionality of the

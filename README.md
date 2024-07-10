@@ -23,7 +23,7 @@ framework.
 It is important to note that `biotidy` serves a different purpose
 compared to [tidyomics](https://github.com/tidyomics), which primarily
 utilizes a pipe-based workflow for managing bioinformatic objects.
-Specifically, “biotidy” provides a method for extracting a data frame
+Specifically, `biotidy` provides a method for extracting a data frame
 from bioinformatic objects, similar to how the `broom::tidy` function
 operates on statistical model objects. The inspiration for `biotidy`
 came from the functionality of the `scuttle::makePerCellDF` and
@@ -49,31 +49,31 @@ represents a sample / cell) from the Bioinformatic objects.
 # SummarizedExperiment method
 makePerCellDF(mocked_se)[1:5, 1:5]
 #>         Gene0001 Gene0002 Gene0003 Gene0004 Gene0005
-#> Cell001        0      653        0      303        0
-#> Cell002        7       64        2      499        1
-#> Cell003        2      814        0      299       23
-#> Cell004        0      464        2      167       17
-#> Cell005        2      497        8      563       46
+#> Cell001        9        1        8      198      901
+#> Cell002        4      539       27       49      211
+#> Cell003        0      420      144       71      538
+#> Cell004        1       66       10      165     1115
+#> Cell005       10      138      206        2      380
 ```
 
 ``` r
 makePerCellDF(mocked_se, melt = TRUE)[1:5, 1:5]
 #>   Mutation_Status Cell_Cycle Treatment .features .assay
-#> 1        negative         G0    treat1  Gene0001      0
-#> 2        positive         G1    treat2  Gene0001      7
-#> 3        negative        G2M    treat1  Gene0001      2
-#> 4        negative        G2M    treat2  Gene0001      0
-#> 5        negative         G1    treat2  Gene0001      2
+#> 1        negative         G0    treat2  Gene0001      9
+#> 2        negative        G2M    treat1  Gene0001      4
+#> 3        positive         G0    treat1  Gene0001      0
+#> 4        negative        G2M    treat2  Gene0001      1
+#> 5        positive         G1    treat2  Gene0001     10
 ```
 
 ``` r
 makePerCellDF(mocked_se, melt = TRUE, keep_rownames = TRUE)[1:5, 1:5]
 #>       .id Mutation_Status Cell_Cycle Treatment .features
-#> 1 Cell001        negative         G0    treat1  Gene0001
-#> 2 Cell002        positive         G1    treat2  Gene0001
-#> 3 Cell003        negative        G2M    treat1  Gene0001
+#> 1 Cell001        negative         G0    treat2  Gene0001
+#> 2 Cell002        negative        G2M    treat1  Gene0001
+#> 3 Cell003        positive         G0    treat1  Gene0001
 #> 4 Cell004        negative        G2M    treat2  Gene0001
-#> 5 Cell005        negative         G1    treat2  Gene0001
+#> 5 Cell005        positive         G1    treat2  Gene0001
 ```
 
 ``` r
@@ -85,31 +85,31 @@ makePerCellDF(mocked_se, features = FALSE, use_coldata = FALSE)
 # SingleCellExperiment method
 makePerCellDF(mocked_sce)[1:5, 1:5]
 #>         Gene0001 Gene0002 Gene0003 Gene0004 Gene0005
-#> Cell001        0        5       29      360        0
-#> Cell002        0        1       18      776        0
-#> Cell003        1        0       99      234        0
-#> Cell004       15       57       36       69        0
-#> Cell005        1       23      213       24        0
+#> Cell001        0       77      113       28      123
+#> Cell002        0       25      239       12        0
+#> Cell003        0      196      149        7       73
+#> Cell004        0      136      171        6       13
+#> Cell005        0      190      125        1       93
 ```
 
 ``` r
 makePerCellDF(mocked_sce, melt = TRUE)[1:5, 1:5]
 #>   Mutation_Status Cell_Cycle Treatment .features .assay
-#> 1        positive         G0    treat1  Gene0001      0
-#> 2        positive          S    treat2  Gene0001      0
-#> 3        positive          S    treat2  Gene0001      1
-#> 4        positive         G0    treat2  Gene0001     15
-#> 5        negative          S    treat2  Gene0001      1
+#> 1        negative         G1    treat2  Gene0001      0
+#> 2        negative        G2M    treat1  Gene0001      0
+#> 3        positive         G0    treat2  Gene0001      0
+#> 4        positive         G0    treat1  Gene0001      0
+#> 5        negative         G1    treat2  Gene0001      0
 ```
 
 ``` r
 makePerCellDF(mocked_sce, melt = TRUE, keep_rownames = TRUE)[1:5, 1:5]
 #>       .id Mutation_Status Cell_Cycle Treatment .features
-#> 1 Cell001        positive         G0    treat1  Gene0001
-#> 2 Cell002        positive          S    treat2  Gene0001
-#> 3 Cell003        positive          S    treat2  Gene0001
-#> 4 Cell004        positive         G0    treat2  Gene0001
-#> 5 Cell005        negative          S    treat2  Gene0001
+#> 1 Cell001        negative         G1    treat2  Gene0001
+#> 2 Cell002        negative        G2M    treat1  Gene0001
+#> 3 Cell003        positive         G0    treat2  Gene0001
+#> 4 Cell004        positive         G0    treat1  Gene0001
+#> 5 Cell005        negative         G1    treat2  Gene0001
 ```
 
 ``` r
@@ -121,31 +121,31 @@ makePerCellDF(mocked_sce, features = FALSE, use_coldata = FALSE)
 # ExpressionSet method
 makePerCellDF(mocked_es)[1:5, 1:5]
 #>         Gene0001 Gene0002 Gene0003 Gene0004 Gene0005
-#> Cell001        0        3        0       16        0
-#> Cell002        6       26      263       21        0
-#> Cell003        0       32        6       23        1
-#> Cell004       26       25       95        6        0
-#> Cell005        3        0       38      108        2
+#> Cell001      148        0       92        0        8
+#> Cell002       24       33      124        2        0
+#> Cell003       61        0      156       18        0
+#> Cell004       20        0       14      102        0
+#> Cell005      214        0      139        0        0
 ```
 
 ``` r
 makePerCellDF(mocked_es, melt = TRUE)[1:5, 1:5]
 #>   Mutation_Status Cell_Cycle Treatment .features .assay
-#> 1        negative        G2M    treat2  Gene0001      0
-#> 2        positive        G2M    treat2  Gene0001      6
-#> 3        positive          S    treat2  Gene0001      0
-#> 4        positive         G0    treat1  Gene0001     26
-#> 5        positive          S    treat2  Gene0001      3
+#> 1        positive         G1    treat1  Gene0001    148
+#> 2        positive         G0    treat1  Gene0001     24
+#> 3        negative         G0    treat1  Gene0001     61
+#> 4        negative          S    treat2  Gene0001     20
+#> 5        positive         G1    treat2  Gene0001    214
 ```
 
 ``` r
 makePerCellDF(mocked_es, melt = TRUE, keep_rownames = TRUE)[1:5, 1:5]
 #>       .id Mutation_Status Cell_Cycle Treatment .features
-#> 1 Cell001        negative        G2M    treat2  Gene0001
-#> 2 Cell002        positive        G2M    treat2  Gene0001
-#> 3 Cell003        positive          S    treat2  Gene0001
-#> 4 Cell004        positive         G0    treat1  Gene0001
-#> 5 Cell005        positive          S    treat2  Gene0001
+#> 1 Cell001        positive         G1    treat1  Gene0001
+#> 2 Cell002        positive         G0    treat1  Gene0001
+#> 3 Cell003        negative         G0    treat1  Gene0001
+#> 4 Cell004        negative          S    treat2  Gene0001
+#> 5 Cell005        positive         G1    treat2  Gene0001
 ```
 
 ``` r
@@ -157,21 +157,21 @@ makePerCellDF(mocked_es, features = FALSE, use_coldata = FALSE)
 # Seurat method
 makePerCellDF(mocked_seurat, layer = "counts")[1:5, 1:5]
 #>         Gene0001 Gene0002 Gene0003 Gene0004 Gene0005
-#> Cell001       98      105        7        4      215
-#> Cell002       20       14        7       69      513
-#> Cell003        0       87        0       58       31
-#> Cell004        0       51        7      125      508
-#> Cell005       59      109        2      105       85
+#> Cell001     1645      797       39        0      171
+#> Cell002      145      189      144        0      153
+#> Cell003      420      534       24        1      109
+#> Cell004      131      162      168      191      102
+#> Cell005      534      151      647      113      621
 ```
 
 ``` r
 makePerCellDF(mocked_seurat, layer = "counts", melt = TRUE)[1:5, 1:5]
 #>      orig.ident nCount_RNA nFeature_RNA Mutation_Status Cell_Cycle
-#> 1 SeuratProject     373573         1487        negative        G2M
-#> 2 SeuratProject     353555         1509        negative        G2M
-#> 3 SeuratProject     346423         1492        negative         G0
-#> 4 SeuratProject     379401         1486        negative         G1
-#> 5 SeuratProject     352126         1480        negative          S
+#> 1 SeuratProject     365821         1514        negative         G0
+#> 2 SeuratProject     373618         1508        negative        G2M
+#> 3 SeuratProject     383489         1506        negative          S
+#> 4 SeuratProject     381968         1497        positive          S
+#> 5 SeuratProject     383394         1489        positive         G0
 ```
 
 ``` r
@@ -179,11 +179,11 @@ makePerCellDF(mocked_seurat,
   layer = "counts", melt = TRUE, keep_rownames = TRUE
 )[1:5, 1:5]
 #>       .id    orig.ident nCount_RNA nFeature_RNA Mutation_Status
-#> 1 Cell001 SeuratProject     373573         1487        negative
-#> 2 Cell002 SeuratProject     353555         1509        negative
-#> 3 Cell003 SeuratProject     346423         1492        negative
-#> 4 Cell004 SeuratProject     379401         1486        negative
-#> 5 Cell005 SeuratProject     352126         1480        negative
+#> 1 Cell001 SeuratProject     365821         1514        negative
+#> 2 Cell002 SeuratProject     373618         1508        negative
+#> 3 Cell003 SeuratProject     383489         1506        negative
+#> 4 Cell004 SeuratProject     381968         1497        positive
+#> 5 Cell005 SeuratProject     383394         1489        positive
 ```
 
 ``` r
@@ -203,31 +203,31 @@ represents a feature / gene).
 # SummarizedExperiment method
 makePerFeatureDF(mocked_se)[1:5, 1:5]
 #>          Cell001 Cell002 Cell003 Cell004 Cell005
-#> Gene0001       0       7       2       0       2
-#> Gene0002     653      64     814     464     497
-#> Gene0003       0       2       0       2       8
-#> Gene0004     303     499     299     167     563
-#> Gene0005       0       1      23      17      46
+#> Gene0001       9       4       0       1      10
+#> Gene0002       1     539     420      66     138
+#> Gene0003       8      27     144      10     206
+#> Gene0004     198      49      71     165       2
+#> Gene0005     901     211     538    1115     380
 ```
 
 ``` r
 makePerFeatureDF(mocked_se, melt = TRUE)[1:5, ]
 #>    .cells .assay
-#> 1 Cell001      0
-#> 2 Cell001    653
-#> 3 Cell001      0
-#> 4 Cell001    303
-#> 5 Cell001      0
+#> 1 Cell001      9
+#> 2 Cell001      1
+#> 3 Cell001      8
+#> 4 Cell001    198
+#> 5 Cell001    901
 ```
 
 ``` r
 makePerFeatureDF(mocked_se, melt = TRUE, keep_rownames = TRUE)[1:5, ]
 #>        .id  .cells .assay
-#> 1 Gene0001 Cell001      0
-#> 2 Gene0002 Cell001    653
-#> 3 Gene0003 Cell001      0
-#> 4 Gene0004 Cell001    303
-#> 5 Gene0005 Cell001      0
+#> 1 Gene0001 Cell001      9
+#> 2 Gene0002 Cell001      1
+#> 3 Gene0003 Cell001      8
+#> 4 Gene0004 Cell001    198
+#> 5 Gene0005 Cell001    901
 ```
 
 ``` r
@@ -262,31 +262,31 @@ makePerFeatureDF(mocked_se, features = FALSE, use_rowdata = FALSE)
 # SingleCellExperiment method
 makePerFeatureDF(mocked_sce)[1:5, 1:5]
 #>          Cell001 Cell002 Cell003 Cell004 Cell005
-#> Gene0001       0       0       1      15       1
-#> Gene0002       5       1       0      57      23
-#> Gene0003      29      18      99      36     213
-#> Gene0004     360     776     234      69      24
-#> Gene0005       0       0       0       0       0
+#> Gene0001       0       0       0       0       0
+#> Gene0002      77      25     196     136     190
+#> Gene0003     113     239     149     171     125
+#> Gene0004      28      12       7       6       1
+#> Gene0005     123       0      73      13      93
 ```
 
 ``` r
 makePerFeatureDF(mocked_sce, melt = TRUE)[1:5, ]
 #>    .cells .assay
 #> 1 Cell001      0
-#> 2 Cell001      5
-#> 3 Cell001     29
-#> 4 Cell001    360
-#> 5 Cell001      0
+#> 2 Cell001     77
+#> 3 Cell001    113
+#> 4 Cell001     28
+#> 5 Cell001    123
 ```
 
 ``` r
 makePerFeatureDF(mocked_sce, melt = TRUE, keep_rownames = TRUE)[1:5, ]
 #>        .id  .cells .assay
 #> 1 Gene0001 Cell001      0
-#> 2 Gene0002 Cell001      5
-#> 3 Gene0003 Cell001     29
-#> 4 Gene0004 Cell001    360
-#> 5 Gene0005 Cell001      0
+#> 2 Gene0002 Cell001     77
+#> 3 Gene0003 Cell001    113
+#> 4 Gene0004 Cell001     28
+#> 5 Gene0005 Cell001    123
 ```
 
 ``` r
@@ -321,31 +321,31 @@ makePerFeatureDF(mocked_sce, features = FALSE, use_rowdata = FALSE)
 # ExpressionSet method
 makePerFeatureDF(mocked_es)[1:5, 1:5]
 #>          Cell001 Cell002 Cell003 Cell004 Cell005
-#> Gene0001       0       6       0      26       3
-#> Gene0002       3      26      32      25       0
-#> Gene0003       0     263       6      95      38
-#> Gene0004      16      21      23       6     108
-#> Gene0005       0       0       1       0       2
+#> Gene0001     148      24      61      20     214
+#> Gene0002       0      33       0       0       0
+#> Gene0003      92     124     156      14     139
+#> Gene0004       0       2      18     102       0
+#> Gene0005       8       0       0       0       0
 ```
 
 ``` r
 makePerFeatureDF(mocked_es, melt = TRUE)[1:5, ]
 #>    .cells .assay
-#> 1 Cell001      0
-#> 2 Cell001      3
-#> 3 Cell001      0
-#> 4 Cell001     16
-#> 5 Cell001      0
+#> 1 Cell001    148
+#> 2 Cell001      0
+#> 3 Cell001     92
+#> 4 Cell001      0
+#> 5 Cell001      8
 ```
 
 ``` r
 makePerFeatureDF(mocked_es, melt = TRUE, keep_rownames = TRUE)[1:5, ]
 #>        .id  .cells .assay
-#> 1 Gene0001 Cell001      0
-#> 2 Gene0002 Cell001      3
-#> 3 Gene0003 Cell001      0
-#> 4 Gene0004 Cell001     16
-#> 5 Gene0005 Cell001      0
+#> 1 Gene0001 Cell001    148
+#> 2 Gene0002 Cell001      0
+#> 3 Gene0003 Cell001     92
+#> 4 Gene0004 Cell001      0
+#> 5 Gene0005 Cell001      8
 ```
 
 ``` r
@@ -380,21 +380,21 @@ makePerFeatureDF(mocked_es, features = FALSE, use_rowdata = FALSE)
 # Seurat method
 makePerFeatureDF(mocked_seurat, layer = "counts")[1:5, 1:5]
 #>          Cell001 Cell002 Cell003 Cell004 Cell005
-#> Gene0001      98      20       0       0      59
-#> Gene0002     105      14      87      51     109
-#> Gene0003       7       7       0       7       2
-#> Gene0004       4      69      58     125     105
-#> Gene0005     215     513      31     508      85
+#> Gene0001    1645     145     420     131     534
+#> Gene0002     797     189     534     162     151
+#> Gene0003      39     144      24     168     647
+#> Gene0004       0       0       1     191     113
+#> Gene0005     171     153     109     102     621
 ```
 
 ``` r
 makePerFeatureDF(mocked_seurat, layer = "counts", melt = TRUE)[1:5, ]
 #>    .cells .assay
-#> 1 Cell001     98
-#> 2 Cell001    105
-#> 3 Cell001      7
-#> 4 Cell001      4
-#> 5 Cell001    215
+#> 1 Cell001   1645
+#> 2 Cell001    797
+#> 3 Cell001     39
+#> 4 Cell001      0
+#> 5 Cell001    171
 ```
 
 ``` r
@@ -402,11 +402,11 @@ makePerFeatureDF(mocked_seurat,
   layer = "counts", melt = TRUE, keep_rownames = TRUE
 )[1:5, ]
 #>        .id  .cells .assay
-#> 1 Gene0001 Cell001     98
-#> 2 Gene0002 Cell001    105
-#> 3 Gene0003 Cell001      7
-#> 4 Gene0004 Cell001      4
-#> 5 Gene0005 Cell001    215
+#> 1 Gene0001 Cell001   1645
+#> 2 Gene0002 Cell001    797
+#> 3 Gene0003 Cell001     39
+#> 4 Gene0004 Cell001      0
+#> 5 Gene0005 Cell001    171
 ```
 
 ``` r

@@ -17,7 +17,9 @@ makePerFeatureDF(x, ...)
   swap_rownames = NULL,
   use_rowdata = TRUE,
   ...,
-  check_names = FALSE
+  melt = FALSE,
+  keep_rownames = FALSE,
+  make_unique = FALSE
 )
 
 \method{makePerFeatureDF}{SingleCellExperiment}(
@@ -27,9 +29,11 @@ makePerFeatureDF(x, ...)
   swap_rownames = NULL,
   use_rowdata = TRUE,
   ...,
-  use_altexps = FALSE,
+  use_altexps = TRUE,
   prefix_altexps = FALSE,
-  check_names = FALSE
+  melt = FALSE,
+  keep_rownames = FALSE,
+  make_unique = FALSE
 )
 
 \method{makePerFeatureDF}{ExpressionSet}(
@@ -39,7 +43,9 @@ makePerFeatureDF(x, ...)
   swap_rownames = NULL,
   use_rowdata = TRUE,
   ...,
-  check_names = FALSE
+  melt = FALSE,
+  keep_rownames = FALSE,
+  make_unique = FALSE
 )
 
 \method{makePerFeatureDF}{Seurat}(
@@ -50,7 +56,9 @@ makePerFeatureDF(x, ...)
   swap_rownames = NULL,
   use_rowdata = TRUE,
   ...,
-  check_names = FALSE
+  melt = FALSE,
+  keep_rownames = FALSE,
+  make_unique = FALSE
 )
 }
 \arguments{
@@ -60,7 +68,7 @@ makePerFeatureDF(x, ...)
 \link[Biobase:class.ExpressionSet]{ExpressionSet} or
 \link[SeuratObject:Seurat-class]{Seurat} object.}
 
-\item{...}{Not used currently}
+\item{...}{Not used currently.}
 
 \item{features}{Logical scalar indicating whether feature assay data of \code{x}
 should be included. Alternatively, Character or integer vector specifying the
@@ -85,8 +93,19 @@ containing the features names. If \code{NULL}, \code{rownames(x)} will be used.}
 should be included. Alternatively, a character or integer vector specifying
 the feature metadata fields to use.}
 
-\item{check_names}{A boolean value indicating whether column names of the
-output should be made syntactically valid and unique.}
+\item{melt}{A single boolean value indicates whether the \code{features} should be
+reshaped into long-format. A column named \code{".features"} will contain all
+feature names and a column named \code{".assay"} will contain all feature assay
+values. You can also specify a string indicates the column \code{".assay"} or a
+character with length 2 indicates the column names of \code{".features"} and
+\code{".assay"}.}
+
+\item{keep_rownames}{If \code{melt} is not \code{NULL}, the rownames will be omitted,
+this argument retains the data.frame's row names under a new column \code{".id"},
+You can also specify a string to names the column of the rownames.}
+
+\item{make_unique}{A boolean value indicating whether column names of the
+output should be made unique.}
 
 \item{use_altexps}{A boolean value indicating whether (meta)data should be
 extracted for \link[SingleCellExperiment:altExps]{alternative} experiments in
@@ -103,7 +122,39 @@ A \link{data.frame}.
 }
 \description{
 Create a per-feature data.frame (i.e., where each row represents a feature /
-gene) from a
-\link[SummarizedExperiment:RangedSummarizedExperiment-class]{SummarizedExperiment}, most
-typically for creating custom ggplot2 plots.
+gene) from a \code{x}.
+}
+\examples{
+# SummarizedExperiment method
+mocked_se <- mockSE()
+makePerFeatureDF(mocked_se)
+makePerFeatureDF(mocked_se, melt = TRUE)
+makePerFeatureDF(mocked_se, melt = TRUE, keep_rownames = TRUE)
+makePerFeatureDF(mocked_se, features = FALSE, use_rowdata = FALSE)
+
+# SingleCellExperiment method
+mocked_sce <- mockSCE()
+makePerFeatureDF(mocked_se)
+makePerFeatureDF(mocked_se, melt = TRUE)
+makePerFeatureDF(mocked_se, melt = TRUE, keep_rownames = TRUE)
+makePerFeatureDF(mocked_se, features = FALSE, use_rowdata = FALSE)
+
+# ExpressionSet method
+mocked_es <- mockES()
+makePerFeatureDF(mocked_se)
+makePerFeatureDF(mocked_se, melt = TRUE)
+makePerFeatureDF(mocked_se, melt = TRUE, keep_rownames = TRUE)
+makePerFeatureDF(mocked_se, features = FALSE, use_rowdata = FALSE)
+
+# Seurat method
+mocked_seurat <- mockSeurat()
+makePerFeatureDF(mocked_seurat)
+makePerFeatureDF(mocked_seurat, layer = "counts", melt = TRUE)
+makePerFeatureDF(mocked_seurat,
+    layer = "counts", melt = TRUE, keep_rownames = TRUE
+)
+makePerFeatureDF(mocked_seurat,
+    layer = "counts", features = FALSE,
+    use_rowdata = FALSE
+)
 }

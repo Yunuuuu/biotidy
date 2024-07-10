@@ -94,7 +94,7 @@ mock_data <- function(ncells = 200, ngenes = 2000, nspikes = 100) {
         "Cell%s",
         formatC(seq_len(ncells), width = 3, flag = 0)
     )
-    metadata <- data.frame(
+    metadata <- data_frame0(
         Mutation_Status = sample(
             c("positive", "negative"), ncells,
             replace = TRUE

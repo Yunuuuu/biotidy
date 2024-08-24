@@ -50,8 +50,8 @@ Mock up a \link[SummarizedExperiment:RangedSummarizedExperiment-class]{Summarize
 \link[SeuratObject:Seurat-class]{Seurat} object containing simulated data.
 }
 \examples{
-mockES()
-mockSE()
-mockSCE()
-mockSeurat()
+mockES(5, 10)
+mockSE(5, 10)
+mockSCE(5, 10)
+mockSeurat(5, 10)
 }

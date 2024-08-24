@@ -13,7 +13,7 @@
 NULL
 
 #' @examples 
-#' mockES()
+#' mockES(5, 10)
 #' @return
 #' - `mockES`: A [ExpressionSet][Biobase::ExpressionSet] object.
 #' @rdname mock
@@ -27,7 +27,7 @@ mockES <- function(ncells = 200, ngenes = 2000) {
 }
 
 #' @examples 
-#' mockSE()
+#' mockSE(5, 10)
 #' @return
 #' - `mockSE`: A
 #'   [SummarizedExperiment][SummarizedExperiment::SummarizedExperiment] object.
@@ -42,7 +42,7 @@ mockSE <- function(ncells = 200, ngenes = 2000) {
 }
 
 #' @examples 
-#' mockSCE()
+#' mockSCE(5, 10)
 #' @return
 #' - `mockSCE`: A
 #'   [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment] object.
@@ -63,7 +63,7 @@ mockSCE <- function(ncells = 200, ngenes = 2000, nspikes = 100) {
 }
 
 #' @examples 
-#' mockSeurat()
+#' mockSeurat(5, 10)
 #' @return
 #' - `mockSeurat`: A [Seurat][SeuratObject::Seurat-class] object.
 #' @rdname mock

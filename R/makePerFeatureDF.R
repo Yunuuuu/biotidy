@@ -14,7 +14,7 @@ makePerFeatureDF <- function(x, ...) UseMethod("makePerFeatureDF")
 
 #' @examples
 #' # SummarizedExperiment method
-#' mocked_se <- mockSE()
+#' mocked_se <- mockSE(5, 10)
 #' makePerFeatureDF(mocked_se)
 #' makePerFeatureDF(mocked_se, melt = TRUE)
 #' makePerFeatureDF(mocked_se, melt = TRUE, keep_rownames = TRUE)
@@ -52,7 +52,7 @@ makePerFeatureDF.SummarizedExperiment <- function(x,
 
 #' @examples
 #' # SingleCellExperiment method
-#' mocked_sce <- mockSCE()
+#' mocked_sce <- mockSCE(5, 10)
 #' makePerFeatureDF(mocked_se)
 #' makePerFeatureDF(mocked_se, melt = TRUE)
 #' makePerFeatureDF(mocked_se, melt = TRUE, keep_rownames = TRUE)
@@ -96,7 +96,7 @@ makePerFeatureDF.SingleCellExperiment <- function(x,
 
 #' @examples
 #' # ExpressionSet method
-#' mocked_es <- mockES()
+#' mocked_es <- mockES(5, 10)
 #' makePerFeatureDF(mocked_se)
 #' makePerFeatureDF(mocked_se, melt = TRUE)
 #' makePerFeatureDF(mocked_se, melt = TRUE, keep_rownames = TRUE)
@@ -134,7 +134,7 @@ makePerFeatureDF.ExpressionSet <- function(x,
 
 #' @examples
 #' # Seurat method
-#' mocked_seurat <- mockSeurat()
+#' mocked_seurat <- mockSeurat(5, 10)
 #' makePerFeatureDF(mocked_seurat)
 #' makePerFeatureDF(mocked_seurat, layer = "counts", melt = TRUE)
 #' makePerFeatureDF(mocked_seurat,

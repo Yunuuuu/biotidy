@@ -33,10 +33,10 @@ work with other bioinformatic objects, such as `SummarizedExperiment`,
 ## Prepare data
 ```{r setup}
 library(biotidy)
-mocked_se <- mockSE()
-mocked_sce <- mockSCE()
-mocked_es <- mockES()
-mocked_seurat <- mockSeurat()
+mocked_se <- mockSE(50, 100)
+mocked_sce <- mockSCE(50, 100)
+mocked_es <- mockES(50, 100)
+mocked_seurat <- mockSeurat(50, 100)
 ```
 
 ## makePerCellDF
@@ -77,8 +77,8 @@ makePerCellDF(mocked_seurat,
   layer = "counts", melt = TRUE, keep_rownames = TRUE
 )[1:5, 1:5]
 makePerCellDF(mocked_seurat,
-  layer = "counts", features = FALSE, use_coldata =
-    FALSE
+  layer = "counts", features = FALSE,
+  use_coldata = FALSE
 )
 ```
 

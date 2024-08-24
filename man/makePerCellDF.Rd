@@ -126,28 +126,28 @@ cell) from a \code{x}.
 }
 \examples{
 # SummarizedExperiment method
-mocked_se <- mockSE()
+mocked_se <- mockSE(5, 10)
 makePerCellDF(mocked_se)
 makePerCellDF(mocked_se, melt = TRUE)
 makePerCellDF(mocked_se, melt = TRUE, keep_rownames = TRUE)
 makePerCellDF(mocked_se, features = FALSE, use_coldata = FALSE)
 
 # SingleCellExperiment method
-mocked_sce <- mockSCE()
+mocked_sce <- mockSCE(5, 10)
 makePerCellDF(mocked_sce)
 makePerCellDF(mocked_sce, melt = TRUE)
 makePerCellDF(mocked_sce, melt = TRUE, keep_rownames = TRUE)
 makePerCellDF(mocked_sce, features = FALSE, use_coldata = FALSE)
 
 # ExpressionSet method
-mocked_es <- mockES()
+mocked_es <- mockES(5, 10)
 makePerCellDF(mocked_es)
 makePerCellDF(mocked_es, melt = TRUE)
 makePerCellDF(mocked_es, melt = TRUE, keep_rownames = TRUE)
 makePerCellDF(mocked_es, features = FALSE, use_coldata = FALSE)
 
 # Seurat method
-mocked_seurat <- mockSeurat()
+mocked_seurat <- mockSeurat(5, 10)
 makePerCellDF(mocked_seurat)
 makePerCellDF(mocked_seurat, layer = "counts", melt = TRUE)
 makePerCellDF(mocked_seurat,
